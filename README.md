@@ -1,25 +1,25 @@
-# 🧪 Cypress UI Automation Project
+# Cypress UI Automation Project
 
 This repository contains automated test cases for the Magento e-commerce demo site:  
 [https://magento.softwaretestingboard.com](https://magento.softwaretestingboard.com)
 
-## 📦 Tech Stack
+## Tech Stack
 
-- ✅ [Cypress](https://www.cypress.io/) for UI Automation
-- ✅ [Page Object Model](https://dev.to/raaynaldo/page-object-model-with-cypress-39gi) structure
-- ✅ [cypress-mochawesome-reporter](https://www.npmjs.com/package/cypress-mochawesome-reporter) for reporting
-- ✅ External data from JSON fixtures
+- [Cypress](https://www.cypress.io/) for UI Automation
+- [Page Object Model](https://dev.to/raaynaldo/page-object-model-with-cypress-39gi) structure
+- [cypress-mochawesome-reporter](https://www.npmjs.com/package/cypress-mochawesome-reporter) for reporting
+- External data from JSON fixtures
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-### 🔧 Prerequisites
+### Prerequisites
 
 - Node.js (v14 or higher)
 - npm
 
-### 📥 Installation
+### Installation
 
 1. Clone the repository
 
@@ -32,7 +32,7 @@ This repository contains automated test cases for the Magento e-commerce demo si
    ```bash
    npm install
 
-### 🧪 Running Tests
+### Running Tests
 
 1. Run All Tests in Headless Mode
 
@@ -49,7 +49,7 @@ This repository contains automated test cases for the Magento e-commerce demo si
    ```bash
    npx cypress open
 
-### 📊 Test Report 
+### Test Report 
 After executing the test cases from the terminal, you will find the test reports under the cypress/reports folder.
 
 
