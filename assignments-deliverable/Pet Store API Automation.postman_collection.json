@@ -1,0 +1,420 @@
+{
+	"info": {
+		"_postman_id": "724c3c05-3116-45be-9aa3-ac86d7020b72",
+		"name": "Pet Store API Automation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20233741"
+	},
+	"item": [
+		{
+			"name": "Create Pet",
+			"item": [
+				{
+					"name": "POST Pet Store API",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 600ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});",
+									"",
+									"var schema = {",
+									"    \"id\": \"number\",",
+									"    \"category\": {",
+									"        \"id\": \"number\",",
+									"        \"name\": \"string\"",
+									"    },",
+									"    \"name\": \"string\",",
+									"    \"photoUrls\": [",
+									"        \"string\",",
+									"        \"string\"",
+									"    ],",
+									"    \"tags\": [",
+									"        {",
+									"            \"id\": \"number\",",
+									"            \"name\": \"string\"",
+									"        },",
+									"        {",
+									"            \"id\": \"number\",",
+									"            \"name\": \"string\"",
+									"        }",
+									"    ],",
+									"    \"status\": \"string\"",
+									"}",
+									"",
+									"pm.test('Schema is valid', function () {",
+									"    pm.response.to.have.jsonSchema(schema);",
+									"});",
+									"",
+									"pm.collectionVariables.set('validPetId', parseInt(pm.response.json().id));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"doggie\",\n    \"photoUrls\": [\n        \"ad tempor id magna\",\n        \"Duis\"\n    ],\n    \"id\": {{$timestamp}},\n    \"category\": {\n        \"id\": -20476978,\n        \"name\": \"id occaecat est\"\n    },\n    \"tags\": [\n        {\n            \"id\": 895601,\n            \"name\": \"magna ipsum\"\n        },\n        {\n            \"id\": 86688648,\n            \"name\": \"quis voluptate\"\n        }\n    ],\n    \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'https://petstore.swagger.io/v2/pet' \\\n--header 'Content-Type: application/json' \\\n--data '{\n    \"name\": \"doggie\",\n    \"photoUrls\": [\n        \"ad tempor id magna\",\n        \"Duis\"\n    ],\n    \"id\": 8979789078978969,\n    \"category\": {\n        \"id\": -20476978,\n        \"name\": \"id occaecat est\"\n    },\n    \"tags\": [\n        {\n            \"id\": 895601,\n            \"name\": \"magna ipsum\"\n        },\n        {\n            \"id\": 86688648,\n            \"name\": \"quis voluptate\"\n        }\n    ],\n    \"status\": \"available\"\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Pet ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 600ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});",
+									"",
+									"pm.test(\"Validate failed response\", function () { ",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.code).to.eql(400);",
+									"    pm.expect(responseJson.type).to.eql('unknown');",
+									"    pm.expect(responseJson.message).to.eql('bad input');",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"doggie\",\n    \"photoUrls\": [\n        \"ad tempor id magna\",\n        \"Duis\"\n    ],\n    \"id\": {{$isoTimestamp}},\n    \"category\": {\n        \"id\": -20476978,\n        \"name\": \"id occaecat est\"\n    },\n    \"tags\": [\n        {\n            \"id\": 895601,\n            \"name\": \"magna ipsum\"\n        },\n        {\n            \"id\": 86688648,\n            \"name\": \"quis voluptate\"\n        }\n    ],\n    \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'https://petstore.swagger.io/v2/pet' \\\n--header 'Content-Type: application/json' \\\n--data '{\n    \"name\": \"doggie\",\n    \"photoUrls\": [\n        \"ad tempor id magna\",\n        \"Duis\"\n    ],\n    \"id\": 8979789078978969,\n    \"category\": {\n        \"id\": -20476978,\n        \"name\": \"id occaecat est\"\n    },\n    \"tags\": [\n        {\n            \"id\": 895601,\n            \"name\": \"magna ipsum\"\n        },\n        {\n            \"id\": 86688648,\n            \"name\": \"quis voluptate\"\n        }\n    ],\n    \"status\": \"available\"\n}'"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Pet By ID",
+			"item": [
+				{
+					"name": "Get Pet Store API By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Validate Pet ID is correct\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"validPetId\"));",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 600ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});",
+									"",
+									"var schema = {",
+									"    \"id\": \"number\",",
+									"    \"category\": {",
+									"        \"id\": \"number\",",
+									"        \"name\": \"string\"",
+									"    },",
+									"    \"name\": \"string\",",
+									"    \"photoUrls\": [",
+									"        \"string\",",
+									"        \"string\"",
+									"    ],",
+									"    \"tags\": [",
+									"        {",
+									"            \"id\": \"number\",",
+									"            \"name\": \"string\"",
+									"        },",
+									"        {",
+									"            \"id\": \"number\",",
+									"            \"name\": \"string\"",
+									"        }",
+									"    ],",
+									"    \"status\": \"string\"",
+									"}",
+									"pm.test('Schema is valid', function () {",
+									"    pm.response.to.have.jsonSchema(schema);",
+									"});",
+									"",
+									"pm.environment.set('validPetId', parseInt(pm.response.json().id));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet/{{validPetId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet",
+								"{{validPetId}}"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'https://petstore.swagger.io/v2/pet' \\\n--header 'Content-Type: application/json' \\\n--data '{\n    \"name\": \"doggie\",\n    \"photoUrls\": [\n        \"ad tempor id magna\",\n        \"Duis\"\n    ],\n    \"id\": 8979789078978969,\n    \"category\": {\n        \"id\": -20476978,\n        \"name\": \"id occaecat est\"\n    },\n    \"tags\": [\n        {\n            \"id\": 895601,\n            \"name\": \"magna ipsum\"\n        },\n        {\n            \"id\": 86688648,\n            \"name\": \"quis voluptate\"\n        }\n    ],\n    \"status\": \"available\"\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Pet ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 600ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});",
+									"",
+									"pm.test(\"Validate failed response\", function () { ",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.code).to.eql(1);",
+									"    pm.expect(responseJson.type).to.eql('error');",
+									"    pm.expect(responseJson.message).to.eql('Pet not found');",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet/{{$timestamp}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet",
+								"{{$timestamp}}"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'https://petstore.swagger.io/v2/pet' \\\n--header 'Content-Type: application/json' \\\n--data '{\n    \"name\": \"doggie\",\n    \"photoUrls\": [\n        \"ad tempor id magna\",\n        \"Duis\"\n    ],\n    \"id\": 8979789078978969,\n    \"category\": {\n        \"id\": -20476978,\n        \"name\": \"id occaecat est\"\n    },\n    \"tags\": [\n        {\n            \"id\": 895601,\n            \"name\": \"magna ipsum\"\n        },\n        {\n            \"id\": 86688648,\n            \"name\": \"quis voluptate\"\n        }\n    ],\n    \"status\": \"available\"\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Incorrect Data Pet ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 600ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});",
+									"",
+									"pm.test(\"Validate failed response\", function () { ",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.code).to.eql(404);",
+									"    pm.expect(responseJson.type).to.eql('unknown');",
+									"    pm.expect(responseJson.message).to.eql('java.lang.NumberFormatException: For input string: \\\"string\\\"');",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet/string",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet",
+								"string"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'https://petstore.swagger.io/v2/pet' \\\n--header 'Content-Type: application/json' \\\n--data '{\n    \"name\": \"doggie\",\n    \"photoUrls\": [\n        \"ad tempor id magna\",\n        \"Duis\"\n    ],\n    \"id\": 8979789078978969,\n    \"category\": {\n        \"id\": -20476978,\n        \"name\": \"id occaecat est\"\n    },\n    \"tags\": [\n        {\n            \"id\": 895601,\n            \"name\": \"magna ipsum\"\n        },\n        {\n            \"id\": 86688648,\n            \"name\": \"quis voluptate\"\n        }\n    ],\n    \"status\": \"available\"\n}'"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://petstore.swagger.io/v2",
+			"type": "string"
+		},
+		{
+			"key": "validPetId",
+			"value": ""
+		}
+	]
+}
